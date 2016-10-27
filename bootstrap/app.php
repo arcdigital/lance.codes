@@ -2,6 +2,12 @@
 
 require_once __DIR__.'/../vendor/autoload.php';
 
+try {
+    (new Dotenv\Dotenv(__DIR__.'/../'))->load();
+} catch (Dotenv\Exception\InvalidPathException $e) {
+    //
+}
+
 /*
 |--------------------------------------------------------------------------
 | Create The Application
@@ -16,6 +22,10 @@ require_once __DIR__.'/../vendor/autoload.php';
 $app = new Laravel\Lumen\Application(
     realpath(__DIR__.'/../')
 );
+
+// $app->withFacades();
+
+// $app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
@@ -50,15 +60,11 @@ $app->singleton(
 */
 
 // $app->middleware([
-//     // Illuminate\Cookie\Middleware\EncryptCookies::class,
-//     // Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
-//     // Illuminate\Session\Middleware\StartSession::class,
-//     // Illuminate\View\Middleware\ShareErrorsFromSession::class,
-//     // Laravel\Lumen\Http\Middleware\VerifyCsrfToken::class,
+//    App\Http\Middleware\ExampleMiddleware::class
 // ]);
 
 // $app->routeMiddleware([
-
+//     'auth' => App\Http\Middleware\Authenticate::class,
 // ]);
 
 /*
@@ -73,6 +79,7 @@ $app->singleton(
 */
 
 // $app->register(App\Providers\AppServiceProvider::class);
+// $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 
 /*
@@ -87,7 +94,7 @@ $app->singleton(
 */
 
 $app->group(['namespace' => 'App\Http\Controllers'], function ($app) {
-    require __DIR__.'/../app/Http/routes.php';
+    require __DIR__.'/../routes/web.php';
 });
 
 return $app;

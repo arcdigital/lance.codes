@@ -1,16 +1,18 @@
 {
-    "name": "lancepioch/lance.codes",
-    "description": "Lance Pioch Codes and Programs",
-    "keywords": ["lance", "pioch", "codes"],
+    "name": "laravel/lumen",
+    "description": "The Laravel Lumen Framework.",
+    "keywords": ["framework", "laravel", "lumen"],
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=5.5.9",
-        "laravel/lumen-framework": "5.1.*",
-        "vlucas/phpdotenv": "~1.0"
+        "php": ">=5.6.4",
+        "laravel/lumen-framework": "5.3.*",
+        "vlucas/phpdotenv": "~2.2"
     },
     "require-dev": {
-        "phpunit/phpunit": "~4.0"
+        "fzaninotto/faker": "~1.4",
+        "phpunit/phpunit": "~5.0",
+        "mockery/mockery": "~0.9"
     },
     "autoload": {
         "psr-4": {
@@ -19,10 +21,15 @@
     },
     "autoload-dev": {
         "classmap": [
-            "tests/"
+            "tests/",
+            "database/"
         ]
     },
-    "config": {
-        "preferred-install": "dist"
-    }
+    "scripts": {
+        "post-root-package-install": [
+            "php -r \"copy('.env.example', '.env');\""
+        ]
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
